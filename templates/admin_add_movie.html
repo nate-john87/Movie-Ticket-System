@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin — Add Movie</h2>
+
+<form method="post" action="{{ url_for('admin_add_movie_submit') }}">
+  <label>Title (required):
+    <input type="text" name="title" required>
+  </label>
+  <br><br>
+
+  <label>Rating (optional):
+    <input type="text" name="rating" placeholder="PG, PG-13, R">
+  </label>
+  <br><br>
+
+  <label>Runtime minutes (optional):
+    <input type="number" name="runtime_minutes" min="1" step="1" placeholder="e.g., 120">
+  </label>
+  <br><br>
+
+  <button type="submit">Add Movie</button>
+</form>
+
+<p><a href="{{ url_for('movies') }}">Back to movies</a></p>
+{% endblock %}

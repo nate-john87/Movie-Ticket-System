@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Movies</h2>
+<ul>
+  {% for m in movies %}
+    <li>
+      <strong>{{ m.title }}</strong> ({{ m.rating or "NR" }}, {{ m.runtime_minutes or "?" }} min)
+      - <a href="{{ url_for('showtimes', movie_id=m.id) }}">View showtimes</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
