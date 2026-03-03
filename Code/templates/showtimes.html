@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Showtimes: {{ movie.title }}</h2>
+<ul>
+  {% for s in showtimes %}
+    <li>
+      {{ s.start_time }} - ${{ "%.2f"|format(s.base_price) }}
+      - <a href="{{ url_for('seats', showtime_id=s.id) }}">Select seats</a>
+    </li>
+  {% endfor %}
+</ul>
+<a href="{{ url_for('movies') }}">Back to movies</a>
+{% endblock %}

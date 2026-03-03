@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Confirmation</h2>
+<p><strong>Booking ID:</strong> {{ booking.id }}</p>
+<p><strong>Name:</strong> {{ booking.customer_name }}</p>
+<p><strong>Movie:</strong> {{ booking.title }}</p>
+<p><strong>Showtime:</strong> {{ booking.start_time }}</p>
+
+<p><strong>Seats:</strong>
+  {% for s in seats %}{{ s.row_label }}{{ s.seat_number }}{% if not loop.last %}, {% endif %}{% endfor %}
+</p>
+
+<a href="{{ url_for('movies') }}">Return to movies</a>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin — Add Showtime</h2>
+
+<form method="post" action="{{ url_for('admin_add_showtime_submit') }}">
+  <label>Movie:
+    <select name="movie_id">
+      {% for m in movies %}
+        <option value="{{ m.id }}">{{ m.title }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <br><br>
+
+  <label>Start time:
+    <input type="datetime-local" name="start_time">
+  </label>
+  <br><br>
+
+  <label>Base price:
+    <input type="number" step="0.01" name="base_price">
+  </label>
+  <br><br>
+
+  <button type="submit">Save Showtime</button>
+</form>
+{% endblock %}

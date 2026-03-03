@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Seat Selection</h2>
+<p><strong>{{ info.title }}</strong> — {{ info.start_time.strftime("%B %d, %Y at %I:%M %p") }} — ${{ "%.2f"|format(info.base_price) }}</p>
+
+<form method="post" action="{{ url_for('purchase', showtime_id=info.showtime_id) }}">
+  <label>Your name: <input name="customer_name" required /></label>
+  <h3>Select seats</h3>
+
+	<div class="legend">
+	  <span class="legend-item">
+		<span class="legend-box available-box"></span> Available
+	  </span>
+
+	  <span class="legend-item">
+		<span class="legend-box selected-box"></span> Selected
+	  </span>
+
+	  <span class="legend-item">
+		<span class="legend-box sold-box"></span> Sold
+	  </span>
+	</div>
+	
+  <div class="seat-grid">
+    {% for seat in seats %}
+      {% if seat.status == 'AVAILABLE' %}
+        <label class="seat available">
+          <input type="checkbox" name="seat_id" value="{{ seat.id }}">
+          <span class="seat-label">{{ seat.row_label }}{{ seat.seat_number }}</span>
+        </label>
+      {% else %}
+        <span class="seat sold">
+          <span class="seat-label">{{ seat.row_label }}{{ seat.seat_number }}</span>
+        </span>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <button type="submit">Purchase</button>
+</form>
+
+<p><a href="{{ url_for('movies') }}">Back</a></p>
+{% endblock %}
